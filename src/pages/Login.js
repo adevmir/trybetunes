@@ -54,7 +54,7 @@ class Login extends React.Component {
     // if (loading) return <Loading />;
     if (logged) return <Redirect to="/search" />;
     return (
-      <>
+      <div>
         {
           loading
             ? <Loading />
@@ -86,7 +86,7 @@ class Login extends React.Component {
               </div>
             )
         }
-      </>
+      </div>
     );
   }
 }
