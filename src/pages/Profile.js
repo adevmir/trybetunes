@@ -53,8 +53,8 @@ class Profile extends Component {
                 <div>
                   <Link to="/profile/edit">Editar perfil</Link>
                 </div>
-              </div>
-              )}
+              </div>)
+          }
         </div>
       </div>
     );
