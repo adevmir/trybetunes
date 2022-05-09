@@ -17,16 +17,30 @@ class MusicCard extends React.Component {
     this.favMusics();
   }
 
+  handleClick(a) {
+    console.log(a);
+  }
+
   async handleCheck(musica) {
+    const { favPage } = this.props;
+    // console.log(favPage);
     this.setState({ sendingMusic: true });
     const { checked } = this.state;
     if (!checked) {
       await addSong(musica);
     }
     if (checked) {
-      await removeSong(musica);
+      if (favPage === 1) {
+        await removeSong(musica);
+        // props.favorites(1);
+        this.favMusics();
+      }
+      if (favPage === 2) {
+        await removeSong(musica);
+      }
     }
     this.setState({ checked: !checked, sendingMusic: false });
+    // this.favMusics();
   }
 
   async favMusics() {
@@ -67,6 +81,7 @@ class MusicCard extends React.Component {
 MusicCard.propTypes = {
   allMusics: PropTypes.objectOf(PropTypes.any).isRequired,
   favs: PropTypes.arrayOf(Object).isRequired,
+  favPage: PropTypes.number.isRequired,
 };
 
 export default MusicCard;

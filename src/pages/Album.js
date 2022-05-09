@@ -56,7 +56,12 @@ class Album extends React.Component {
             <h1 data-testid="artist-name">{ album.artistName }</h1>
             <h2 data-testid="album-name">{ album.collectionName }</h2>
             {musics.map((music) => (
-              <MusicCard allMusics={ music } key={ music.trackId } favs={ musicFav } />
+              <MusicCard
+                allMusics={ music }
+                key={ music.trackId }
+                favs={ musicFav }
+                favPage={ 2 }
+              />
             ))}
           </div>) : 'Carregando...' }
       </div>
