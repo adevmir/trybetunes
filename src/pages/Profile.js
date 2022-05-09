@@ -28,8 +28,31 @@ class Profile extends Component {
     });
   }
 
+  renderUserInfo() {
+    const { name, email, img, desc } = this.state;
+    return (
+      <div>
+        <div>
+          <img data-testid="profile-image" src={ img } alt={ `Img do ${name}` } />
+        </div>
+        <div>
+          <label htmlFor="nome">{name}</label>
+        </div>
+        <div>
+          <label htmlFor="e-mail">{email}</label>
+        </div>
+        <div>
+          <label htmlFor="descricao">{desc}</label>
+        </div>
+        <div>
+          <Link to="/profile/edit">Editar perfil</Link>
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const { name, email, img, desc, loading } = this.state;
+    const { loading } = this.state;
     return (
       <div data-testid="page-profile">
         <Header />
@@ -37,23 +60,7 @@ class Profile extends Component {
           {
             loading
               ? <Loading />
-              : (<div>
-                <div>
-                  <img data-testid="profile-image" src={ img } alt={ `Foto do ${name}` }/>
-                </div>
-                <div>
-                  <label htmlFor="nome">{name}</label>
-                </div>
-                <div>
-                  <label htmlFor="e-mail">{email}</label>
-                </div>
-                <div>
-                  <label htmlFor="descricao">{desc}</label>
-                </div>
-                <div>
-                  <Link to="/profile/edit">Editar perfil</Link>
-                </div>
-              </div>)
+              : this.renderUserInfo()
           }
         </div>
       </div>

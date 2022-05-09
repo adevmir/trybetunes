@@ -62,9 +62,8 @@ class ProfileEdit extends Component {
     await updateUser({ name, email, image, description });
   }
 
-  render() {
+  renderFormEdit() {
     const {
-      loading,
       name,
       email,
       image,
@@ -72,60 +71,69 @@ class ProfileEdit extends Component {
       isSaveButton,
     } = this.state;
     return (
+      <form>
+        <label htmlFor="image">
+          <img src="image" alt="name" />
+          <input
+            data-testid="edit-input-image"
+            name="image"
+            type="text"
+            defaultValue={ image }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <label htmlFor="name">
+          <input
+            data-testid="edit-input-name"
+            name="name"
+            type="text"
+            defaultValue={ name }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <label htmlFor="email">
+          <input
+            data-testid="edit-input-email"
+            name="email"
+            type="text"
+            defaultValue={ email }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <label htmlFor="description">
+          <input
+            data-testid="edit-input-description"
+            name="description"
+            type="textArea"
+            defaultValue={ description }
+            onChange={ this.onInputChange }
+          />
+        </label>
+        <div>
+          <button
+            type="button"
+            data-testid="edit-button-save"
+            onClick={ this.onClickSave }
+            disabled={ isSaveButton }
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
+    );
+  }
+
+  render() {
+    const {
+      loading,
+    } = this.state;
+    return (
       <div data-testid="page-profile-edit">
         <div>
           {
             !loading
               ? <Loading />
-              : (<form>
-                <label htmlFor="image">
-                  <img src="image" alt="name" />
-                  <input
-                    data-testid="edit-input-image"
-                    name="image"
-                    type="text"
-                    defaultValue={ image }
-                    onChange={ this.onInputChange }
-                  />
-                </label>
-                <label htmlFor="name">
-                  <input
-                    data-testid="edit-input-name"
-                    name="name"
-                    type="text"
-                    defaultValue={ name }
-                    onChange={ this.onInputChange }
-                  />
-                </label>
-                <label htmlFor="email">
-                  <input
-                    data-testid="edit-input-email"
-                    name="email"
-                    type="text"
-                    defaultValue={ email }
-                    onChange={ this.onInputChange }
-                  />
-                </label>
-                <label htmlFor="description">
-                  <input
-                    data-testid="edit-input-description"
-                    name="description"
-                    type="textArea"
-                    defaultValue={ description }
-                    onChange={ this.onInputChange }
-                  />
-                </label>
-                <div>
-                  <button
-                    type="button"
-                    data-testid="edit-button-save"
-                    onClick={ this.onClickSave }
-                    disabled={ isSaveButton }
-                  >
-                    Salvar
-                  </button>
-                </div>
-              </form>)
+              : this.renderFormEdit()
           }
         </div>
       </div>
